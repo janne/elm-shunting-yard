@@ -3,6 +3,7 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.App
+import Regex exposing (HowMany(All), regex)
 import Html.Events exposing (onInput)
 
 
@@ -17,12 +18,31 @@ main =
 
 model : Model
 model =
-    { expression = "" }
+    { expression = ""
+    , parsed = []
+    }
 
 
 type alias Model =
     { expression : String
+    , parsed : List String
     }
+
+
+
+-- PARSER
+
+
+tokenize : String -> List String
+tokenize str =
+    let
+        exp =
+            regex "[+\\-*/()]|[^+\\-*/()\\s]+"
+
+        matches =
+            Regex.find All exp str
+    in
+        List.map .match matches
 
 
 
@@ -37,7 +57,7 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         Change expression ->
-            { model | expression = expression }
+            { model | expression = expression, parsed = tokenize expression }
 
 
 
@@ -50,4 +70,5 @@ view model =
         [ h1 []
             [ text "Elm Calculator" ]
         , input [ type' "text", onInput Change ] []
+        , div [] [ text <| toString model.parsed ]
         ]
