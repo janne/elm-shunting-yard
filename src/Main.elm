@@ -3,6 +3,7 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.App
+import Html.Events exposing (onInput)
 
 
 main : Program Never
@@ -29,14 +30,14 @@ type alias Model =
 
 
 type Msg
-    = NoOp
+    = Change String
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        NoOp ->
-            model
+        Change expression ->
+            { model | expression = expression }
 
 
 
@@ -46,5 +47,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [ class "content" ]
-        [ h1 [] [ text "Elm Calculator" ]
+        [ h1 []
+            [ text "Elm Calculator" ]
+        , input [ type' "text", onInput Change ] []
         ]
