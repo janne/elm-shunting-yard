@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Parser of simple mathemetical expressions",
-    "repository": "https://github.com/janne/elm-parser.git",
+    "repository": "https://github.com/janne/elm-shunting-yard.git",
     "license": "MIT",
     "source-directories": [
         "src"
