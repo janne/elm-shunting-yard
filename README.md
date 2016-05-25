@@ -1,8 +1,9 @@
 Elm Shunting Yard
 =================
 
-Parses mathematical integer expression in infix format using the Shunting Yard
-Algorithm. Outputs in reverse polish notation and a calculated value.
+Parses mathematical integer expression in infix format using the [Shunting Yard
+Algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm). Outputs in
+reverse polish notation and a calculated value.
 
 Setup
 -----
