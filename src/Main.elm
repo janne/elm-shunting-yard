@@ -26,7 +26,7 @@ model =
 
 
 type Token
-    = Number Int
+    = Number Float
     | OpenParen
     | CloseParen
     | AddOp
@@ -187,7 +187,7 @@ parse ts =
                     CloseParen
 
                 _ ->
-                    case String.toInt str of
+                    case String.toFloat str of
                         Ok n ->
                             Number n
 
@@ -211,9 +211,8 @@ tokenize str =
 
 
 -- CALC
---calc : List Token -> Int
 
-
+calc : List Token -> Float
 calc tokens =
     let
         f op lst =
@@ -224,7 +223,7 @@ calc tokens =
                             Number (x * y) :: ys
 
                         DivOp ->
-                            Number (y // x) :: ys
+                            Number (y / x) :: ys
 
                         AddOp ->
                             Number (x + y) :: ys
